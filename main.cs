@@ -4,6 +4,6 @@ class Program {
   public static void Main (string[] args) 
   {
     //The next line shows what will be displayed on the console.
-    Console.WriteLine("John Smith \n8/15/1978 \nwork 000-111-0101 \ncell 000-111-0189");
+    Console.WriteLine("Now, this is a story all about how \nMy life got flipped-turned upside down \nAnd I'd like to take a minute \nJust sit right there \nI'll tell you how I became the prince of a town called Bel-Air");
     }
 }
