@@ -1,9 +1,28 @@
 using System;
 
-class Program {
-  public static void Main (string[] args) 
+class Program 
+{
+  static void Main()
   {
-    //The next line shows what will be displayed on the console.
-    Console.WriteLine("Now, this is a story all about how \nMy life got flipped-turned upside down \nAnd I'd like to take a minute \nJust sit right there \nI'll tell you how I became the prince of a town called Bel-Air");
+    const double CentimetersPerInch = 2.54;
+    //constants 
+
+    double inches;
+    double centimeters; 
+     //variables
+
+    Console.Write("Enter the measurement in inches: ");
+    if (!double.TryParse(Console.ReadLine(), out inches))
+    //inputs in inches
+    {
+      
     }
+
+    centimeters = inches * CentimetersPerInch;
+    //calculations
+
+    Console.WriteLine($"{inches} inches is equal to {centimeters} centimeters.");
+    //output in centimeters 
+  }
+
 }
