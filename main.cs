@@ -1,46 +1,57 @@
 using System;
 
-class Program
+class Program 
 {
     static void Main()
     {
-        Console.WriteLine("Enter the wind speed in miles per hour:");
-        if (double.TryParse(Console.ReadLine(), out double windSpeed))
+        Console.WriteLine("Welcome to the Perfect Number Checker!");
+
+        while (true)
         {
-            string category = CategorizeHurricane(windSpeed);
-            Console.WriteLine($"The hurricane category is: {category}");
-        }
-        else
-        {
-            Console.WriteLine("Invalid input. Please enter a valid number.");
+            Console.Write("Enter a number (or 0 to quit): ");
+            string input = Console.ReadLine();
+
+            if (input == "0")
+            {
+                Console.WriteLine("Thank you for using the Perfect Number Checker.\nGoodbye!");
+                break;
+            }
+
+            if (int.TryParse(input, out int number))
+            {
+                if (IsPerfectNumber(number))
+                {
+                    Console.WriteLine($"{number} is a Perfect Number.");
+                }
+                else
+                {
+                    Console.WriteLine($"{number} is Not a Perfect Number.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.");
+            }
         }
     }
 
-    static string CategorizeHurricane(double windSpeed)
+    static bool IsPerfectNumber(int num)
     {
-        if (windSpeed >= 157)
+        if (num <= 1)
         {
-            return "Category Five Hurricane";
+            return false;
         }
-        else if (windSpeed >= 130)
+
+        int sumOfDivisors = 1; 
+
+        for (int i = 2; i <= num / 2; i++)
         {
-            return "Category Four Hurricane";
+            if (num % i == 0)
+            {
+                sumOfDivisors += i;
+            }
         }
-        else if (windSpeed >= 111)
-        {
-            return "Category Three Hurricane";
-        }
-        else if (windSpeed >= 96)
-        {
-            return "Category Two Hurricane";
-        }
-        else if (windSpeed >= 74)
-        {
-            return "Category One Hurricane";
-        }
-        else
-        {
-            return "Not a Hurricane";
-        }
+
+        return sumOfDivisors == num;
     }
 }
