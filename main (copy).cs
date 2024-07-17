@@ -1,6 +1,7 @@
 using System;
 
-class Program
+class HomeSales
+
 {
     static void Main()
     {
