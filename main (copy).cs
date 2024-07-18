@@ -16,7 +16,7 @@ class HomeSales
         while (true)
         {
             Console.Write("Salesperson initial: ");
-            string input = Console.ReadLine().ToUpper();
+            string input = Console.ReadLine().ToUpper(); 
 
             if (input == "Z")
                 break;
