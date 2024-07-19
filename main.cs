@@ -4,70 +4,60 @@ class Program
 {
     static void Main()
     {
-        int salesPersonDTotal = 0;
-        int salesPersonETotal = 0;
-        int salesPersonFTotal = 0;
+        string[] salespersons = { "Danielle", "Edward", "Francis" };
+        char[] allowedInitials = { 'D', 'E', 'F' };
+        int[] sales = new int[salespersons.Length];
+        
         int grandTotal = 0;
-        char salesPersonInitial;
-
-        Console.WriteLine("Enter the salesperson initial (D, E, or F) or Z to finish:");
+        char highestSaleInitial = ' '; 
+        int highestSaleAmount = 0;
 
         while (true)
         {
-            Console.Write("Salesperson initial: ");
-            string input = Console.ReadLine().ToUpper();
+            Console.Write("Enter salesperson initial (D, E, F) or 'Q' to quit: ");
+            char initial = char.ToUpper(Console.ReadKey().KeyChar);
+            Console.WriteLine();
 
-            if (input == "Z")
+            if (initial == 'Q')
+            {
                 break;
+            }
 
-            if (input != "D" && input != "E" && input != "F")
+            int index = Array.IndexOf(allowedInitials, initial);
+
+            if (index == -1)
             {
-                Console.WriteLine("Error, invalid salesperson selected, please try again.");
+                Console.WriteLine("Error, invalid salesperson selected, please try again");
                 continue;
             }
 
-            salesPersonInitial = input[0]; 
-
-            Console.Write("Amount of sale: ");
-            if (!int.TryParse(Console.ReadLine(), out int saleAmount))
+            Console.Write("Enter sale amount: ");
+            int saleAmount;
+            if (!int.TryParse(Console.ReadLine(), out saleAmount) || saleAmount < 0)
             {
-                Console.WriteLine("Invalid input for sale amount. Please enter a valid integer.");
+                Console.WriteLine("Invalid sale amount, please enter a valid positive number.");
                 continue;
             }
 
-            switch (salesPersonInitial)
-            {
-                case 'D':
-                    salesPersonDTotal += saleAmount;
-                    break;
-                case 'E':
-                    salesPersonETotal += saleAmount;
-                    break;
-                case 'F':
-                    salesPersonFTotal += saleAmount;
-                    break;
-                default:
-                    break;
-            }
-
+            sales[index] += saleAmount;
             grandTotal += saleAmount;
+
+            if (saleAmount > highestSaleAmount)
+            {
+                highestSaleAmount = saleAmount;
+                highestSaleInitial = initial;
+            }
+
+            Console.WriteLine($"Salesperson: {salespersons[index]} Sale amount: ${saleAmount:n0}");
         }
 
-        Console.WriteLine($"\nGrand Total: ${grandTotal}");
-        
-        int highestTotal = Math.Max(salesPersonDTotal, Math.Max(salesPersonETotal, salesPersonFTotal));
-        string highestSalesperson = "";
-        
-        if (highestTotal == salesPersonDTotal)
-            highestSalesperson = "D";
-        else if (highestTotal == salesPersonETotal)
-            highestSalesperson = "E";
-        else if (highestTotal == salesPersonFTotal)
-            highestSalesperson = "F";
-        
-        Console.WriteLine($"Highest Sale: {highestSalesperson}");
+        Console.WriteLine();
+        Console.WriteLine($"Grand Total: ${grandTotal:n0}");
 
-        Console.WriteLine("\nPress any key to exit.");
-        Console.ReadKey(); 
+        if (highestSaleInitial != ' ')
+        {
+            int highestIndex = Array.IndexOf(allowedInitials, highestSaleInitial);
+            Console.WriteLine($"Highest Sale: {salespersons[highestIndex]}");
+        }
     }
 }
